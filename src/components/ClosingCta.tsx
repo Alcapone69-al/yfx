@@ -11,7 +11,7 @@ export function ClosingCta({
       {/* faceta gigante em fundo: o canto cortado do Y */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute right-0 top-0 h-full w-[55vw] bg-volt/[0.06] [clip-path:polygon(35%_0,100%_0,100%_100%,0_100%)]"
+        className="pointer-events-none absolute right-0 top-0 h-full w-[55vw] bg-brand-gradient opacity-[0.09] [clip-path:polygon(35%_0,100%_0,100%_100%,0_100%)]"
       />
       <div className="relative mx-auto max-w-[1440px] px-5 py-28 sm:px-8 sm:py-40 lg:px-12">
         <MaskLines
@@ -33,7 +33,7 @@ export function ClosingCta({
               href={WHATSAPP_PROJECT_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="facet-sm inline-flex min-h-14 items-center justify-center bg-volt px-8 text-lg font-semibold text-volt-ink transition-transform duration-300 hover:-translate-y-0.5"
+              className="facet-sm inline-flex min-h-14 items-center justify-center bg-brand px-8 text-lg font-semibold text-brand-ink transition-transform duration-300 hover:-translate-y-0.5"
             >
               Marcar o diagnóstico no WhatsApp
             </a>

@@ -35,7 +35,7 @@ export function ServicesList({ initial = 0 }: { initial?: number }) {
                 </span>
                 <span
                   aria-hidden="true"
-                  className={`relative mt-2 h-5 w-5 shrink-0 transition-transform duration-500 ${isOpen ? "rotate-45 text-volt" : "text-fog group-hover:text-bone"}`}
+                  className={`relative mt-2 h-5 w-5 shrink-0 transition-transform duration-500 ${isOpen ? "rotate-45 text-brand" : "text-fog group-hover:text-bone"}`}
                 >
                   <span className="absolute left-0 top-1/2 h-0.5 w-5 -translate-y-1/2 bg-current" />
                   <span className="absolute left-1/2 top-0 h-5 w-0.5 -translate-x-1/2 bg-current" />
@@ -58,7 +58,7 @@ export function ServicesList({ initial = 0 }: { initial?: number }) {
                       <li key={it} className="flex gap-3">
                         <span
                           aria-hidden="true"
-                          className="mt-[0.7em] h-1.5 w-1.5 shrink-0 bg-volt [clip-path:polygon(0_0,100%_0,100%_60%,60%_100%,0_100%)]"
+                          className="mt-[0.7em] h-1.5 w-1.5 shrink-0 bg-brand [clip-path:polygon(0_0,100%_0,100%_60%,60%_100%,0_100%)]"
                         />
                         {it}
                       </li>
@@ -70,7 +70,7 @@ export function ServicesList({ initial = 0 }: { initial?: number }) {
                       <Link
                         to="/portfolio/$slug"
                         params={{ slug: ex.slug }}
-                        className="text-bone underline decoration-volt underline-offset-4"
+                        className="text-bone underline decoration-brand underline-offset-4"
                       >
                         {ex.name}
                       </Link>

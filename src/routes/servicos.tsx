@@ -87,7 +87,7 @@ function ServicesPage() {
                     <Link
                       to="/portfolio/$slug"
                       params={{ slug: ex.slug }}
-                      className="text-bone underline decoration-volt underline-offset-4"
+                      className="text-bone underline decoration-brand underline-offset-4"
                     >
                       {ex.name}
                     </Link>
@@ -117,13 +117,13 @@ function ServicesPage() {
                     </ol>
                   </div>
                   <div className="bg-slate p-8 sm:p-10">
-                    <p className="type-mid text-2xl text-volt">Com um agente de IA</p>
+                    <p className="type-mid text-2xl text-brand">Com um agente de IA</p>
                     <ol className="mt-6 space-y-3">
                       {AUTOMATION_EXAMPLE.after.map((t) => (
                         <li key={t} className="flex gap-3">
                           <span
                             aria-hidden="true"
-                            className="mt-[0.7em] h-px w-4 shrink-0 bg-volt"
+                            className="mt-[0.7em] h-px w-4 shrink-0 bg-brand"
                           />
                           {t}
                         </li>

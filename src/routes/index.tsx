@@ -119,7 +119,7 @@ function Home() {
             <dl className="mt-12 grid grid-cols-2 gap-8 border-t border-line pt-8">
               <div>
                 <dt className="text-sm text-fog">Projetos para clientes em 2026</dt>
-                <dd className="type-wide mt-2 text-6xl text-volt tabular-nums">
+                <dd className="type-wide mt-2 text-6xl text-brand tabular-nums">
                   {PROJECTS.length}
                 </dd>
               </div>

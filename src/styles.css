@@ -1,12 +1,13 @@
 @import "tailwindcss" source(none);
 @source "../src";
-@import "@fontsource-variable/anybody/wdth.css";
-@import "@fontsource-variable/hanken-grotesk/wght.css";
+@import "@fontsource-variable/mona-sans/wdth.css";
+@import "@fontsource-variable/geist/wght.css";
 
 /*
  * YFX — sistema visual
- * Tinta azul-negra, osso, nevoeiro e um único acento: verde elétrico.
- * O ciano do logótipo vive só no símbolo e na luz do herói.
+ * As cores do logótipo em todo o site: azul-marinho profundo como fundo,
+ * azul e ciano como acentos. O ciano é o acento de ação (botões, foco, destaques).
+ * Tipografia: Mona Sans (títulos, com eixo de largura) + Geist (texto).
  * Assinatura: a faceta — o corte angular do "Y".
  */
 
@@ -17,27 +18,35 @@
   --color-line: var(--line);
   --color-bone: var(--bone);
   --color-fog: var(--fog);
-  --color-volt: var(--volt);
-  --color-volt-ink: var(--volt-ink);
+  --color-brand: var(--brand);
+  --color-brand-ink: var(--brand-ink);
+  --color-blue: var(--blue);
+  --color-navy: var(--navy);
   --color-cyan: var(--cyan);
 
-  --font-display: "Anybody Variable", "Arial Narrow", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Hanken Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Mona Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out-facet: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 :root {
-  --ink: #05070a;
-  --graphite: #0d1116;
-  --slate: #161b22;
-  --line: #242b34;
-  --bone: #eceee6;
-  --fog: #9aa2ab;
-  --volt: #a3ff3c;
-  --volt-ink: #0a1400;
+  /* fundos: o azul-marinho do logótipo levado quase ao negro */
+  --ink: #050b1a;
+  --graphite: #0a1428;
+  --slate: #0f1d3a;
+  --line: #1c2b4d;
+  /* texto */
+  --bone: #eef3fb;
+  --fog: #94a3bf;
+  /* cores do logótipo */
+  --navy: #1e3a8a;
+  --blue: #1d4ed8;
   --cyan: #22d3ee;
+  --brand: #22d3ee;
+  --brand-ink: #041626;
+  --gradient-brand: linear-gradient(120deg, #1d4ed8 0%, #0891b2 55%, #22d3ee 100%);
 
   /* tamanho do corte de faceta */
   --facet: 28px;
@@ -82,12 +91,12 @@
   }
 
   ::selection {
-    background: var(--volt);
-    color: var(--volt-ink);
+    background: var(--brand);
+    color: var(--brand-ink);
   }
 
   :focus-visible {
-    outline: 2px solid var(--volt);
+    outline: 2px solid var(--brand);
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -103,18 +112,28 @@
 /* Display expressivo: largura e peso como parte da mensagem. */
 @utility type-wide {
   font-family: var(--font-display);
-  font-stretch: 130%;
+  font-stretch: 125%;
   font-weight: 800;
+  letter-spacing: -0.02em;
 }
 @utility type-narrow {
   font-family: var(--font-display);
-  font-stretch: 62%;
-  font-weight: 300;
+  font-stretch: 75%;
+  font-weight: 350;
 }
 @utility type-mid {
   font-family: var(--font-display);
   font-stretch: 100%;
-  font-weight: 650;
+  font-weight: 640;
+  letter-spacing: -0.02em;
+}
+@utility bg-brand-gradient {
+  background-image: var(--gradient-brand);
+}
+@utility text-brand-gradient {
+  background-image: var(--gradient-brand);
+  background-clip: text;
+  color: transparent;
 }
 
 /* ---------- Faceta: a assinatura ---------- */
@@ -288,12 +307,13 @@
   font-family: var(--font-display);
 }
 .hero-l1 {
-  font-stretch: calc(var(--w, 62) * 1%);
-  font-weight: var(--g, 280);
+  font-stretch: calc(var(--w, 75) * 1%);
+  font-weight: var(--g, 300);
 }
 .hero-l2 {
   font-stretch: calc(var(--w, 112) * 1%);
-  font-weight: var(--g, 860);
+  font-weight: var(--g, 850);
+  word-spacing: 0.08em;
 }
 /* Com JS, escondido até o GSAP fixar o estado inicial (sem salto visual). */
 .js .hero:not(.hero-ready) .hero-l1,
@@ -306,7 +326,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: var(--volt);
+  background: var(--brand);
   transform: translateY(-100%);
   animation: cue 2.2s var(--ease-in-out-facet) infinite;
 }
@@ -335,21 +355,22 @@
 }
 @media (hover: hover) {
   .project-row:hover .project-title {
-    font-stretch: 114%;
-    font-weight: 820;
+    font-stretch: 116%;
+    font-weight: 800;
   }
 }
 .project-row:focus-visible .project-title {
-  font-stretch: 114%;
-  font-weight: 820;
+  font-stretch: 116%;
+  font-weight: 800;
 }
 
 /* ---------- Serviços ---------- */
 
 .service-title {
   font-family: var(--font-display);
-  font-stretch: 88%;
-  font-weight: 560;
+  font-stretch: 90%;
+  font-weight: 500;
+  letter-spacing: -0.02em;
   color: var(--fog);
   transition:
     font-stretch 0.8s var(--ease-out-expo),
@@ -363,6 +384,6 @@
 }
 .service-row[data-open="true"] .service-title {
   color: var(--bone);
-  font-stretch: 118%;
-  font-weight: 800;
+  font-stretch: 116%;
+  font-weight: 780;
 }

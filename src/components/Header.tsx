@@ -66,7 +66,7 @@ export function Header() {
     <>
       <a
         href="#conteudo"
-        className="sr-only bg-volt px-4 py-2 text-sm font-semibold text-volt-ink focus:not-sr-only focus:fixed focus:left-4 focus:top-3 focus:z-[80]"
+        className="sr-only bg-brand px-4 py-2 text-sm font-semibold text-brand-ink focus:not-sr-only focus:fixed focus:left-4 focus:top-3 focus:z-[80]"
       >
         Saltar para o conteúdo
       </a>
@@ -100,7 +100,7 @@ export function Header() {
             href={WHATSAPP_PROJECT_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="facet-sm hidden bg-volt px-5 py-2.5 text-sm font-semibold text-volt-ink transition-transform duration-300 hover:-translate-y-0.5 md:inline-flex"
+            className="facet-sm hidden bg-brand px-5 py-2.5 text-sm font-semibold text-brand-ink transition-transform duration-300 hover:-translate-y-0.5 md:inline-flex"
           >
             Começar um projeto
           </a>
@@ -148,7 +148,7 @@ export function Header() {
             to="/"
             className="type-mid border-b border-line py-4 text-[2.4rem] leading-none"
             activeOptions={{ exact: true }}
-            activeProps={{ className: "!text-volt" }}
+            activeProps={{ className: "!text-brand" }}
           >
             Início
           </Link>
@@ -157,7 +157,7 @@ export function Header() {
               key={n.to}
               to={n.to}
               className="type-mid border-b border-line py-4 text-[2.4rem] leading-none"
-              activeProps={{ className: "!text-volt" }}
+              activeProps={{ className: "!text-brand" }}
             >
               {n.label}
             </Link>
@@ -168,7 +168,7 @@ export function Header() {
             href={WHATSAPP_PROJECT_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="facet-sm flex min-h-12 items-center justify-center bg-volt px-5 font-semibold text-volt-ink"
+            className="facet-sm flex min-h-12 items-center justify-center bg-brand px-5 font-semibold text-brand-ink"
           >
             Começar um projeto no WhatsApp
           </a>

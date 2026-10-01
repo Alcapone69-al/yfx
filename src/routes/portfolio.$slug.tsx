@@ -123,7 +123,7 @@ function CaseStudy() {
             <ul className="mt-8 space-y-3">
               {p.features.map((f) => (
                 <li key={f} className="flex gap-3 leading-7">
-                  <span aria-hidden="true" className="mt-[0.65em] h-1.5 w-1.5 shrink-0 bg-volt" />
+                  <span aria-hidden="true" className="mt-[0.65em] h-1.5 w-1.5 shrink-0 bg-brand" />
                   {f}
                 </li>
               ))}
@@ -184,7 +184,7 @@ function VisitLink({ p }: { p: Project }) {
       href={projectHref(p)}
       target="_blank"
       rel="noopener noreferrer"
-      className="facet-sm inline-flex min-h-12 items-center gap-3 bg-volt px-6 font-semibold text-volt-ink transition-transform duration-300 hover:-translate-y-0.5"
+      className="facet-sm inline-flex min-h-12 items-center gap-3 bg-brand px-6 font-semibold text-brand-ink transition-transform duration-300 hover:-translate-y-0.5"
     >
       {p.urlLabel}
       <span className="sr-only">(abre num novo separador)</span>

@@ -86,13 +86,13 @@ export function ProcessSteps() {
           </p>
           {pinned && (
             <div aria-hidden="true" className="mt-14 flex items-end gap-8">
-              <span className="type-wide text-[9rem] leading-[0.8] text-volt tabular-nums">
+              <span className="type-wide text-brand-gradient text-[9rem] leading-[0.8] tabular-nums">
                 {String(active + 1).padStart(2, "0")}
               </span>
               <span className="relative mb-3 block h-28 w-px bg-line">
                 <span
                   ref={bar}
-                  className="absolute inset-0 origin-top bg-volt"
+                  className="absolute inset-0 origin-top bg-brand-gradient"
                   style={{ transform: "scaleY(0)" }}
                 />
               </span>

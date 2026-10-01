@@ -4,7 +4,7 @@ import { Y_PARTS } from "@/components/YMark";
 /**
  * Peça central do herói: o "Y" da YFX construído em facetas low-poly.
  * - As três partes do Y entram e encaixam (como no logótipo).
- * - O ponteiro é uma luz: ilumina as facetas do Y e revela a malha à volta, em verde elétrico.
+ * - O ponteiro é uma luz: ilumina as facetas do Y e revela a malha à volta, em ciano.
  * - Sem ponteiro (telemóvel), a luz orbita devagar.
  * Canvas 2D: leve, sem dependências. Pausa fora do ecrã e com o separador escondido.
  * Movimento reduzido: um único desenho estático.
@@ -20,7 +20,8 @@ const PART_STYLE = {
 } as const;
 type PartKey = keyof typeof PART_STYLE;
 
-const VOLT = "163,255,60";
+// cor da malha e das arestas: o ciano do logótipo
+const LINE = "34,211,238";
 
 function rand(seed: number) {
   // gerador determinístico — a malha é sempre igual entre visitas
@@ -228,7 +229,7 @@ export function HeroFacets({ className = "" }: { className?: string }) {
       ctx.lineWidth = 1;
       buckets.forEach((list, i) => {
         if (!list.length) return;
-        ctx.strokeStyle = `rgba(${VOLT},${0.05 + i * 0.07})`;
+        ctx.strokeStyle = `rgba(${LINE},${0.05 + i * 0.07})`;
         ctx.beginPath();
         for (const tr of list) {
           ctx.moveTo(tr.a[0] + mx, tr.a[1] + my);
@@ -275,7 +276,7 @@ export function HeroFacets({ className = "" }: { className?: string }) {
         ctx.save();
         ctx.globalAlpha = p * 0.5;
         partPath(key, ox, oy);
-        ctx.strokeStyle = `rgba(${VOLT},0.55)`;
+        ctx.strokeStyle = `rgba(${LINE},0.55)`;
         ctx.lineWidth = 1;
         ctx.stroke();
         ctx.restore();

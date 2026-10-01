@@ -26,13 +26,13 @@ export function Hero() {
     const fit = () => {
       const wide = window.innerWidth >= 640;
       b.style.whiteSpace = wide ? "nowrap" : "normal";
-      let w = wide ? 138 : 112;
+      let w = wide ? 125 : 112;
       b.style.setProperty("--w", String(w));
-      b.style.setProperty("--g", "860");
+      b.style.setProperty("--g", "850");
       const parent = b.parentElement!;
       const over = () =>
         wide ? b.scrollWidth > parent.clientWidth + 1 : b.scrollWidth > b.clientWidth + 1;
-      while (over() && w > 70) {
+      while (over() && w > 75) {
         w -= 4;
         b.style.setProperty("--w", String(w));
       }
@@ -50,8 +50,8 @@ export function Hero() {
       if (cancelled) return;
       const w2 = fit();
       if (reduced || !gsap) {
-        a.style.setProperty("--w", "62");
-        a.style.setProperty("--g", "280");
+        a.style.setProperty("--w", "75");
+        a.style.setProperty("--g", "300");
         el.classList.add("hero-ready");
         return;
       }
@@ -59,14 +59,14 @@ export function Hero() {
         const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
         tl.fromTo(
           a,
-          { "--w": 100, "--g": 560, yPercent: 40, opacity: 0 },
-          { "--w": 62, "--g": 280, yPercent: 0, opacity: 1, duration: 1.6 },
+          { "--w": 100, "--g": 540, yPercent: 40, opacity: 0 },
+          { "--w": 75, "--g": 300, yPercent: 0, opacity: 1, duration: 1.6 },
           0.1,
         )
           .fromTo(
             b,
-            { "--w": 62, "--g": 300, yPercent: 40, opacity: 0 },
-            { "--w": w2, "--g": 860, yPercent: 0, opacity: 1, duration: 1.8 },
+            { "--w": 75, "--g": 300, yPercent: 40, opacity: 0 },
+            { "--w": w2, "--g": 850, yPercent: 0, opacity: 1, duration: 1.8 },
             0.32,
           )
           .fromTo(
@@ -133,7 +133,7 @@ export function Hero() {
               href={WHATSAPP_PROJECT_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="facet-sm inline-flex min-h-12 items-center bg-volt px-6 font-semibold text-volt-ink transition-transform duration-300 hover:-translate-y-0.5"
+              className="facet-sm inline-flex min-h-12 items-center bg-brand px-6 font-semibold text-brand-ink transition-transform duration-300 hover:-translate-y-0.5"
             >
               Começar um projeto
             </a>

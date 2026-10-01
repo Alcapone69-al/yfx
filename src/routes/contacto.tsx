@@ -67,7 +67,7 @@ function Contact() {
                   <span className="service-title text-[clamp(1.7rem,3.6vw,3rem)] leading-none">
                     {t.label}
                   </span>
-                  <span className="flex shrink-0 items-center gap-2 text-sm text-fog transition-colors group-hover:text-volt">
+                  <span className="flex shrink-0 items-center gap-2 text-sm text-fog transition-colors group-hover:text-brand">
                     <span className="hidden sm:inline">Abrir WhatsApp</span>
                     <span className="sr-only sm:hidden">Abrir WhatsApp</span>
                     <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4">
@@ -98,7 +98,7 @@ function Contact() {
             className="group bg-ink p-8 transition-colors hover:bg-graphite sm:p-12"
           >
             <p className="text-sm text-fog">WhatsApp</p>
-            <p className="type-mid mt-3 text-2xl group-hover:text-volt sm:text-3xl">
+            <p className="type-mid mt-3 text-2xl group-hover:text-brand sm:text-3xl">
               {WHATSAPP_LABEL}
             </p>
             <p className="mt-3 text-sm text-fog">{COMMITMENTS[1]?.text}</p>
@@ -110,7 +110,7 @@ function Contact() {
             className="group bg-ink p-8 transition-colors hover:bg-graphite sm:p-12"
           >
             <p className="text-sm text-fog">Instagram</p>
-            <p className="type-mid mt-3 text-2xl group-hover:text-volt sm:text-3xl">
+            <p className="type-mid mt-3 text-2xl group-hover:text-brand sm:text-3xl">
               {INSTAGRAM_LABEL}
             </p>
             <p className="mt-3 text-sm text-fog">Veja projetos e novidades.</p>

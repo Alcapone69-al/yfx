@@ -132,12 +132,12 @@ function ProjectRow({ p, flip, H }: { p: Project; flip: boolean; H: "h2" | "h3" 
           <span className="mt-7 inline-flex items-center gap-3 font-semibold">
             <span className="relative">
               Ver o estudo de caso
-              <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-volt transition-transform duration-500 group-hover:scale-x-100 group-focus-visible:scale-x-100" />
+              <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-brand transition-transform duration-500 group-hover:scale-x-100 group-focus-visible:scale-x-100" />
             </span>
             <svg
               aria-hidden="true"
               viewBox="0 0 24 24"
-              className="h-4 w-4 text-volt transition-transform duration-500 group-hover:translate-x-1"
+              className="h-4 w-4 text-brand transition-transform duration-500 group-hover:translate-x-1"
             >
               <path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2" />
             </svg>

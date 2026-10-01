@@ -40,7 +40,7 @@ function NotFoundComponent() {
         O endereço pode ter mudado. Volte ao início ou veja o nosso trabalho.
       </p>
       <div className="mt-10 flex flex-wrap gap-4">
-        <Link to="/" className="facet-sm bg-volt px-6 py-3.5 font-semibold text-volt-ink">
+        <Link to="/" className="facet-sm bg-brand px-6 py-3.5 font-semibold text-brand-ink">
           Ir para o início
         </Link>
         <Link
@@ -79,7 +79,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
             router.invalidate();
             reset();
           }}
-          className="facet-sm bg-volt px-6 py-3.5 font-semibold text-volt-ink"
+          className="facet-sm bg-brand px-6 py-3.5 font-semibold text-brand-ink"
         >
           Tentar novamente
         </button>
@@ -101,7 +101,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
-      { name: "theme-color", content: "#05070a" },
+      { name: "theme-color", content: "#050b1a" },
       { title: TITLE },
       { name: "description", content: DESC },
       { name: "author", content: "YFX" },
