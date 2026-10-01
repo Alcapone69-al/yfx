@@ -13,7 +13,7 @@ function Mockup({ p, compact = false }: { p: Projeto; compact?: boolean }) {
           <span className="h-2 w-2 rounded-full bg-border" />
           <span className="h-2 w-2 rounded-full bg-border" />
           <span className="ml-3 truncate rounded-md bg-background px-2.5 py-0.5 text-[10px] font-medium text-muted-foreground">
-            {p.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+            {p.url.startsWith("http") ? p.url.replace(/^https?:\/\//, "").replace(/\/$/, "") : "demonstração · yfx"}
           </span>
         </div>
         <img
@@ -26,7 +26,7 @@ function Mockup({ p, compact = false }: { p: Projeto; compact?: boolean }) {
           className="block aspect-[16/10] w-full object-cover object-top"
         />
       </div>
-      <div
+      {p.mobile && (<div
         className={`absolute bottom-0 right-0 overflow-hidden rounded-[1.1rem] border-[5px] border-foreground bg-foreground shadow-glow transition-transform duration-500 group-hover:-translate-y-2 ${
           compact ? "w-[22%]" : "w-[24%] sm:w-[20%]"
         }`}
@@ -40,7 +40,7 @@ function Mockup({ p, compact = false }: { p: Projeto; compact?: boolean }) {
           decoding="async"
           className="block aspect-[390/700] w-full rounded-[0.7rem] object-cover object-top"
         />
-      </div>
+      </div>)}
     </div>
   );
 }
@@ -75,7 +75,7 @@ export function PortfolioPreview() {
             </Link>
           </div>
         </Reveal>
-        <ul className="mt-12 grid gap-10 md:grid-cols-3 md:gap-7">
+        <ul className="mt-12 grid gap-10 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-14">
           {PROJETOS.map((p, i) => (
             <Reveal as="li" key={p.slug} delay={i * 90}>
               <a href={p.url} target="_blank" rel="noopener noreferrer" className="group block">
@@ -126,6 +126,11 @@ export function PortfolioList() {
                     </li>
                   ))}
                 </ul>
+                {p.nota && (
+                  <p className="mt-6 rounded-xl border border-border bg-surface px-4 py-3 text-sm leading-6 text-muted-foreground">
+                    {p.nota}
+                  </p>
+                )}
                 <a
                   href={p.url}
                   target="_blank"

@@ -14,7 +14,7 @@ export default defineConfig({
     tsConfigPaths(),
     tailwindcss(),
     tanstackStart({
-      prerender: { enabled: true, crawlLinks: true, autoSubfolderIndex: true },
+      prerender: { enabled: true, crawlLinks: false, autoSubfolderIndex: true },
       pages: [{ path: "/" }, { path: "/servicos" }, { path: "/sobre" }, { path: "/portfolio" }, { path: "/contacto" }],
     }),
     viteReact(),

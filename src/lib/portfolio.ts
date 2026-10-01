@@ -10,7 +10,8 @@ export type Projeto = {
   url: string;
   urlLabel: string;
   desktop: string;
-  mobile: string;
+  mobile?: string;
+  nota?: string;
   acento: string;
 };
 
@@ -56,5 +57,19 @@ export const PROJETOS: Projeto[] = [
     desktop: img("mentor-desktop.webp"),
     mobile: img("mentor-mobile.webp"),
     acento: "#d4a43a",
+  },
+  {
+    slug: "erp",
+    cliente: "Armazém ERP",
+    tipo: "Sistema de gestão",
+    setor: "Armazenista de mercearia · Nampula e Maputo",
+    resumo:
+      "Sistema de gestão desenvolvido para um armazenista de mercearia que está a expandir de Nampula para Maputo: vendas, stock por armazém, transferências, contabilidade, faturas e recibos num só painel, com acessos por função.",
+    entregas: ["Vendas e faturação", "Stock e lotes a vencer", "Dois armazéns", "Contabilidade e caixa", "Acessos por função"],
+    url: `${import.meta.env.BASE_URL}demos/armazem-erp/`,
+    urlLabel: "Experimentar a demonstração",
+    desktop: img("erp-desktop.webp"),
+    acento: "#1b3a8c",
+    nota: "Entre com o utilizador admin e a palavra-passe admin123. Os dados são de demonstração.",
   },
 ];
