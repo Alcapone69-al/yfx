@@ -6,6 +6,7 @@ import { TrustBadges, FoundingClients } from "@/components/sections/Trust";
 import { Reveal } from "@/components/Reveal";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { DashboardMockup } from "@/components/sections/Approach";
+import { PortfolioPreview } from "@/components/sections/Portfolio";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -48,6 +49,7 @@ function Index() {
         <TrustBadges />
         <Sectors />
         <Services />
+        <PortfolioPreview />
         <FoundingClients />
         <section className="bg-background py-20 text-center sm:py-24">
           <Reveal className="mx-auto max-w-2xl px-5">

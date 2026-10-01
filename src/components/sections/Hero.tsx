@@ -22,6 +22,7 @@ export function SiteHeader() {
         <nav className="hidden items-center gap-7 text-sm font-medium text-muted-foreground md:flex">
           <Link to="/" activeOptions={{ exact: true }} activeProps={{ className: "text-foreground" }} className="transition-colors hover:text-foreground">Início</Link>
           <Link to="/servicos" activeProps={{ className: "text-foreground" }} className="transition-colors hover:text-foreground">Serviços</Link>
+          <Link to="/portfolio" activeProps={{ className: "text-foreground" }} className="transition-colors hover:text-foreground">Portfólio</Link>
           <Link to="/sobre" activeProps={{ className: "text-foreground" }} className="transition-colors hover:text-foreground">Sobre</Link>
           <Link to="/contacto" activeProps={{ className: "text-foreground" }} className="transition-colors hover:text-foreground">Contacto</Link>
         </nav>
@@ -56,6 +57,9 @@ export function SiteHeader() {
               </SheetClose>
               <SheetClose asChild>
                 <Link to="/servicos" activeProps={{ className: "bg-secondary text-foreground" }} className="rounded-md px-4 py-3 text-base font-semibold text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">Serviços</Link>
+              </SheetClose>
+              <SheetClose asChild>
+                <Link to="/portfolio" activeProps={{ className: "bg-secondary text-foreground" }} className="rounded-md px-4 py-3 text-base font-semibold text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">Portfólio</Link>
               </SheetClose>
               <SheetClose asChild>
                 <Link to="/sobre" activeProps={{ className: "bg-secondary text-foreground" }} className="rounded-md px-4 py-3 text-base font-semibold text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">Sobre</Link>
