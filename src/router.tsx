@@ -10,6 +10,8 @@ export const getRouter = () => {
     basepath: import.meta.env.BASE_URL,
     context: { queryClient },
     scrollRestoration: true,
+    // transições nativas entre páginas (View Transitions API), com recurso automático
+    defaultViewTransition: true,
     defaultPreloadStaleTime: 0,
   });
 

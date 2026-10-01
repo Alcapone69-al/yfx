@@ -6,7 +6,7 @@ import tsConfigPaths from "vite-tsconfig-paths";
 
 // Site estático (pré-renderizado) para GitHub Pages — sem dependência do Lovable.
 // SITE_BASE: "/yfx/" no GitHub Pages sem domínio; "/" quando houver domínio próprio.
-const base = process.env.SITE_BASE ?? "/";
+const base = process.env["SITE_BASE"] ?? "/";
 
 export default defineConfig({
   base,
@@ -15,7 +15,14 @@ export default defineConfig({
     tailwindcss(),
     tanstackStart({
       prerender: { enabled: true, crawlLinks: false, autoSubfolderIndex: true },
-      pages: [{ path: "/" }, { path: "/servicos" }, { path: "/sobre" }, { path: "/portfolio" }, { path: "/contacto" }],
+      pages: [
+        { path: "/" },
+        { path: "/portfolio" },
+        ...["da-ka", "giquira-group", "mentor-de-milhoes", "armazem-erp"].map((s) => ({ path: `/portfolio/${s}` })),
+        { path: "/servicos" },
+        { path: "/sobre" },
+        { path: "/contacto" },
+      ],
     }),
     viteReact(),
   ],

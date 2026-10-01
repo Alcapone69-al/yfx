@@ -11,26 +11,46 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
+import { RevealObserver } from "@/components/motion";
+import { WHATSAPP_URL } from "@/lib/site";
+
+const TITLE = "YFX — Estúdio digital em Maputo";
+const DESC =
+  "Websites, sistemas de gestão, automação e agentes de IA no WhatsApp para empresas moçambicanas. Diagnóstico gratuito. Maputo, Moçambique.";
+
+/*
+ * Antes de pintar: marca <html> com .js para ativar as animações de entrada.
+ * Se a aplicação não arrancar em 4 s, retira a marca para que nada fique escondido.
+ */
+const BOOT = `(function(d){var e=d.documentElement;e.classList.add('js');setTimeout(function(){if(!e.dataset.hydrated){e.classList.remove('js');}},4000);})(document);`;
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
-          </Link>
-        </div>
+    <main
+      id="conteudo"
+      className="mx-auto flex min-h-[80svh] max-w-[1440px] flex-col justify-end px-5 pb-20 pt-40 sm:px-8 lg:px-12"
+    >
+      <p className="text-fog">Erro 404</p>
+      <h1 className="type-wide mt-4 max-w-4xl text-[clamp(1.9rem,9.6vw,7rem)]">
+        Esta página não existe.
+      </h1>
+      <p className="mt-6 max-w-xl text-lg text-fog">
+        O endereço pode ter mudado. Volte ao início ou veja o nosso trabalho.
+      </p>
+      <div className="mt-10 flex flex-wrap gap-4">
+        <Link to="/" className="facet-sm bg-volt px-6 py-3.5 font-semibold text-volt-ink">
+          Ir para o início
+        </Link>
+        <Link
+          to="/portfolio"
+          className="border border-line px-6 py-3.5 font-semibold transition-colors hover:border-bone"
+        >
+          Ver o trabalho
+        </Link>
       </div>
-    </div>
+    </main>
   );
 }
 
@@ -42,33 +62,37 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   }, [error]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
-        </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <button
-            onClick={() => {
-              router.invalidate();
-              reset();
-            }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Try again
-          </button>
-          <a
-            href={import.meta.env.BASE_URL}
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-          >
-            Go home
-          </a>
-        </div>
+    <main
+      id="conteudo"
+      className="mx-auto flex min-h-[80svh] max-w-[1440px] flex-col justify-end px-5 pb-20 pt-40 sm:px-8 lg:px-12"
+    >
+      <h1 className="type-wide max-w-4xl text-[clamp(2.2rem,6vw,5rem)]">
+        Esta página não carregou.
+      </h1>
+      <p className="mt-6 max-w-xl text-lg text-fog">
+        Tente novamente. Se o problema continuar, fale connosco no WhatsApp.
+      </p>
+      <div className="mt-10 flex flex-wrap gap-4">
+        <button
+          type="button"
+          onClick={() => {
+            router.invalidate();
+            reset();
+          }}
+          className="facet-sm bg-volt px-6 py-3.5 font-semibold text-volt-ink"
+        >
+          Tentar novamente
+        </button>
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="border border-line px-6 py-3.5 font-semibold"
+        >
+          Falar no WhatsApp
+        </a>
       </div>
-    </div>
+    </main>
   );
 }
 
@@ -76,38 +100,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "YFX — Soluções digitais inteligentes em Maputo" },
-      {
-        name: "description",
-        content: "Websites, sistemas de gestão, automação e agentes de IA no WhatsApp para PMEs moçambicanas. Diagnóstico gratuito. Maputo, Moçambique.",
-      },
+      { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
+      { name: "theme-color", content: "#05070a" },
+      { title: TITLE },
+      { name: "description", content: DESC },
       { name: "author", content: "YFX" },
-      { property: "og:title", content: "YFX — Soluções digitais inteligentes em Maputo" },
-      {
-        property: "og:description",
-        content: "Websites, sistemas de gestão, automação e agentes de IA no WhatsApp para PMEs moçambicanas. Diagnóstico gratuito. Maputo, Moçambique.",
-      },
+      { property: "og:site_name", content: "YFX" },
+      { property: "og:locale", content: "pt_MZ" },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "YFX — Soluções digitais inteligentes em Maputo" },
-      { name: "twitter:description", content: "Websites, sistemas de gestão, automação e agentes de IA no WhatsApp para PMEs moçambicanas. Diagnóstico gratuito. Maputo, Moçambique." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/7ae868c4-d037-458d-bcd4-a72a8dd106e2" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/7ae868c4-d037-458d-bcd4-a72a8dd106e2" },
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESC },
     ],
     links: [
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap",
-      },
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
+      { rel: "stylesheet", href: appCss },
       { rel: "icon", href: `${import.meta.env.BASE_URL}favicon.ico`, type: "image/x-icon" },
     ],
+    scripts: [{ children: BOOT }],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -117,11 +128,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="pt">
+    <html lang="pt" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body className="grain">
         {children}
         <Scripts />
       </body>
@@ -134,8 +145,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+      <Header />
+      <RevealObserver />
       <Outlet />
+      <Footer />
     </QueryClientProvider>
   );
 }

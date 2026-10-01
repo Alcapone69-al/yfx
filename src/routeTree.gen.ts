@@ -11,9 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactoRouteImport } from './routes/contacto'
-import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as PortfolioIndexRouteImport } from './routes/portfolio.index'
+import { Route as PortfolioSlugRouteImport } from './routes/portfolio.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -23,11 +24,6 @@ const IndexRoute = IndexRouteImport.update({
 const ContactoRoute = ContactoRouteImport.update({
   id: '/contacto',
   path: '/contacto',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PortfolioRoute = PortfolioRouteImport.update({
-  id: '/portfolio',
-  path: '/portfolio',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicosRoute = ServicosRouteImport.update({
@@ -40,43 +36,76 @@ const SobreRoute = SobreRouteImport.update({
   path: '/sobre',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PortfolioIndexRoute = PortfolioIndexRouteImport.update({
+  id: '/portfolio/',
+  path: '/portfolio/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortfolioSlugRoute = PortfolioSlugRouteImport.update({
+  id: '/portfolio/$slug',
+  path: '/portfolio/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contacto': typeof ContactoRoute
-  '/portfolio': typeof PortfolioRoute
   '/servicos': typeof ServicosRoute
   '/sobre': typeof SobreRoute
+  '/portfolio/$slug': typeof PortfolioSlugRoute
+  '/portfolio/': typeof PortfolioIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contacto': typeof ContactoRoute
-  '/portfolio': typeof PortfolioRoute
   '/servicos': typeof ServicosRoute
   '/sobre': typeof SobreRoute
+  '/portfolio/$slug': typeof PortfolioSlugRoute
+  '/portfolio': typeof PortfolioIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/contacto': typeof ContactoRoute
-  '/portfolio': typeof PortfolioRoute
   '/servicos': typeof ServicosRoute
   '/sobre': typeof SobreRoute
+  '/portfolio/$slug': typeof PortfolioSlugRoute
+  '/portfolio/': typeof PortfolioIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contacto' | '/portfolio' | '/servicos' | '/sobre'
+  fullPaths:
+    | '/'
+    | '/contacto'
+    | '/servicos'
+    | '/sobre'
+    | '/portfolio/$slug'
+    | '/portfolio/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contacto' | '/portfolio' | '/servicos' | '/sobre'
-  id: '__root__' | '/' | '/contacto' | '/portfolio' | '/servicos' | '/sobre'
+  to:
+    | '/'
+    | '/contacto'
+    | '/servicos'
+    | '/sobre'
+    | '/portfolio/$slug'
+    | '/portfolio'
+  id:
+    | '__root__'
+    | '/'
+    | '/contacto'
+    | '/servicos'
+    | '/sobre'
+    | '/portfolio/$slug'
+    | '/portfolio/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactoRoute: typeof ContactoRoute
-  PortfolioRoute: typeof PortfolioRoute
   ServicosRoute: typeof ServicosRoute
   SobreRoute: typeof SobreRoute
+  PortfolioSlugRoute: typeof PortfolioSlugRoute
+  PortfolioIndexRoute: typeof PortfolioIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -95,13 +124,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactoRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/portfolio': {
-      id: '/portfolio'
-      path: '/portfolio'
-      fullPath: '/portfolio'
-      preLoaderRoute: typeof PortfolioRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/servicos': {
       id: '/servicos'
       path: '/servicos'
@@ -116,15 +138,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SobreRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/portfolio/': {
+      id: '/portfolio/'
+      path: '/portfolio'
+      fullPath: '/portfolio/'
+      preLoaderRoute: typeof PortfolioIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portfolio/$slug': {
+      id: '/portfolio/$slug'
+      path: '/portfolio/$slug'
+      fullPath: '/portfolio/$slug'
+      preLoaderRoute: typeof PortfolioSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactoRoute: ContactoRoute,
-  PortfolioRoute: PortfolioRoute,
   ServicosRoute: ServicosRoute,
   SobreRoute: SobreRoute,
+  PortfolioSlugRoute: PortfolioSlugRoute,
+  PortfolioIndexRoute: PortfolioIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

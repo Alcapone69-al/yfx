@@ -1,17 +1,20 @@
 {
-  "name": "tanstack_start_ts",
+  "name": "yfx-site",
   "private": true,
   "sideEffects": false,
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build",
+    "build": "vite build && node scripts/postbuild.mjs",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "build:pages": "SITE_BASE=/yfx/ vite build && SITE_BASE=/yfx/ node scripts/postbuild.mjs"
   },
   "dependencies": {
+    "@fontsource-variable/anybody": "^5.3.0",
+    "@fontsource-variable/hanken-grotesk": "^5.3.0",
     "@hookform/resolvers": "^5.2.2",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-alert-dialog": "^1.1.15",
@@ -50,6 +53,7 @@
     "date-fns": "^4.1.0",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^13.4.4",
+    "gsap": "^3.15.0",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.575.0",
     "react": "^19.2.0",

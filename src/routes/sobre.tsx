@@ -1,50 +1,114 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SiteHeader } from "@/components/sections/Hero";
-import { Approach } from "@/components/sections/Approach";
-import { Process, FinalCta, SiteFooter } from "@/components/sections/Process";
-import { TrustBadges, FoundingClients } from "@/components/sections/Trust";
+import { ProcessSteps } from "@/components/ProcessSteps";
+import { ClosingCta } from "@/components/ClosingCta";
+import { MaskLines, Reveal } from "@/components/motion";
+import { YMark } from "@/components/YMark";
+import { PRINCIPLES, COMMITMENTS } from "@/lib/site";
 
+const TITLE = "Estúdio — YFX";
 const DESC =
-  "A YFX é uma empresa de tecnologia sediada em Maputo que ajuda PMEs moçambicanas a digitalizar processos com abordagem consultiva e suporte contínuo.";
+  "A YFX é um estúdio de tecnologia em Maputo que usa IA e ferramentas digitais para pôr empresas moçambicanas online, com soluções feitas à medida.";
 
 export const Route = createFileRoute("/sobre")({
   head: () => ({
     meta: [
-      { title: "Sobre a YFX — parceiro digital em Maputo" },
+      { title: TITLE },
       { name: "description", content: DESC },
-      { property: "og:title", content: "Sobre a YFX — parceiro digital em Maputo" },
+      { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: SobrePage,
+  component: About,
 });
 
-function SobrePage() {
+function About() {
   return (
-    <div className="min-h-screen bg-background">
-      <SiteHeader />
-      <main>
-        <section className="bg-surface py-20 sm:py-28">
-          <div className="mx-auto max-w-6xl px-5">
-            <h1 className="max-w-3xl text-4xl font-extrabold leading-[1.03] tracking-[-0.035em] sm:text-6xl">
-              Um parceiro digital, <span className="text-gradient-brand">não apenas um fornecedor</span>
-            </h1>
-            <p className="mt-7 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg">
-              Somos uma equipa de tecnologia sediada em Maputo. Trabalhamos com empresas
-              moçambicanas que querem crescer sem depender de processos manuais — do primeiro
-              website ao agente de IA que responde aos clientes no WhatsApp.
-            </p>
+    <main id="conteudo">
+      <section className="relative mx-auto max-w-[1440px] overflow-hidden px-5 pb-20 pt-[calc(var(--header-h)+5rem)] sm:px-8 lg:px-12 lg:pt-[calc(var(--header-h)+8rem)]">
+        <MaskLines
+          as="h1"
+          lines={["Um parceiro digital,", "não apenas", "um fornecedor."]}
+          className="type-mid relative z-10 text-[clamp(2.5rem,6.6vw,7rem)] leading-[0.92]"
+        />
+        <YMark
+          className="pointer-events-none absolute -right-10 top-24 hidden h-[34rem] w-[34rem] opacity-[0.12] lg:block"
+          title=""
+        />
+      </section>
+
+      <section aria-labelledby="visao" className="border-t border-line">
+        <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-24 sm:px-8 sm:py-32 lg:grid-cols-12 lg:px-12">
+          <h2
+            id="visao"
+            className="type-mid text-[clamp(2rem,3.6vw,3.25rem)] leading-none lg:col-span-4"
+          >
+            Porque existimos
+          </h2>
+          <div className="space-y-6 text-lg leading-8 lg:col-span-7 lg:col-start-6">
+            <Reveal as="p" className="text-bone/90">
+              Muitas empresas moçambicanas ainda vivem só no mundo físico. A YFX existe para as pôr
+              online, com websites, sistemas e automação que resolvem problemas concretos do dia a
+              dia.
+            </Reveal>
+            <Reveal as="p" delay={80} className="text-fog">
+              Usamos a inteligência artificial e as ferramentas da internet como vantagem:
+              entregamos mais depressa e com mais qualidade, sem cortar no cuidado.
+            </Reveal>
+            <Reveal as="p" delay={160} className="text-fog">
+              Cada website e cada sistema é pensado para o negócio que o vai usar. Não reutilizamos
+              o mesmo modelo de um cliente para o outro.
+            </Reveal>
+            <Reveal as="p" delay={240} className="text-fog">
+              Somos uma empresa nova, sediada em Maputo. Por isso trabalhamos com poucos projetos de
+              cada vez e com atenção total a cada um.
+            </Reveal>
           </div>
-        </section>
-        <Approach />
-        <TrustBadges />
-        <Process />
-        <FoundingClients />
-        <FinalCta />
-      </main>
-      <SiteFooter />
-    </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="principios" className="border-t border-line">
+        <div className="mx-auto max-w-[1440px] px-5 py-24 sm:px-8 sm:py-32 lg:px-12">
+          <h2 id="principios" className="type-mid text-[clamp(2rem,3.6vw,3.25rem)] leading-none">
+            Como pensamos
+          </h2>
+          <div className="mt-14 grid gap-px bg-line sm:grid-cols-2">
+            {PRINCIPLES.map((p, i) => (
+              <Reveal key={p.title} delay={i * 80} className="bg-ink p-8 sm:p-10">
+                <h3 className="type-mid text-[1.75rem] leading-tight">{p.title}</h3>
+                <p className="mt-4 max-w-md leading-7 text-fog">{p.text}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section aria-label="Como trabalhamos" className="border-t border-line">
+        <ProcessSteps />
+      </section>
+
+      <section aria-labelledby="compromissos" className="border-t border-line">
+        <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-24 sm:px-8 sm:py-32 lg:grid-cols-12 lg:px-12">
+          <h2
+            id="compromissos"
+            className="type-mid text-[clamp(2rem,3.6vw,3.25rem)] leading-none lg:col-span-4"
+          >
+            O nosso compromisso
+          </h2>
+          <dl className="lg:col-span-7 lg:col-start-6">
+            {COMMITMENTS.map((c) => (
+              <div
+                key={c.title}
+                className="grid gap-2 border-t border-line py-6 last:border-b sm:grid-cols-[14rem_1fr] sm:gap-8"
+              >
+                <dt className="font-semibold">{c.title}</dt>
+                <dd className="leading-7 text-fog">{c.text}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      <ClosingCta />
+    </main>
   );
 }
