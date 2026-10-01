@@ -34,7 +34,7 @@ function Contact() {
         <MaskLines
           as="h1"
           lines={["Vamos conversar."]}
-          className="type-wide text-[clamp(1.9rem,9.6vw,10rem)] leading-[0.88]"
+          className="type-wide text-[clamp(2.3rem,8vw,6.75rem)] leading-[0.88]"
         />
         <Reveal
           delay={150}

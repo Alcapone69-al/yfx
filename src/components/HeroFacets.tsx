@@ -89,11 +89,12 @@ export function HeroFacets({ className = "" }: { className?: string }) {
       canvas.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const wide = W >= 1024;
-      const size = wide ? Math.min(H * 0.78, W * 0.42) : Math.min(W * 0.66, H * 0.36);
+      // o Y fica centrado no painel onde o canvas vive
+      const wide = W >= 640;
+      const size = Math.min(W, H) * 0.7;
       const s = size / 64;
-      const cx = wide ? W * 0.7 : W * 0.5;
-      const cy = wide ? H * 0.47 : H * 0.27;
+      const cx = W * 0.5;
+      const cy = H * 0.52;
       yBox = { x: cx - 32 * s, y: cy - 32 * s, s };
 
       // malha triangular com jitter determinístico

@@ -87,7 +87,7 @@ function ProjectRow({ p, flip, H }: { p: Project; flip: boolean; H: "h2" | "h3" 
     >
       {/* título em toda a largura, alinhado alternadamente */}
       <H
-        className={`project-title text-[clamp(2.6rem,6.4vw,7rem)] leading-[0.9] ${flip ? "lg:text-right" : ""}`}
+        className={`project-title text-[clamp(2.3rem,5.6vw,5.5rem)] leading-[0.9] ${flip ? "lg:text-right" : ""}`}
         style={{ viewTransitionName: `title-${p.slug}` }}
       >
         {p.name}

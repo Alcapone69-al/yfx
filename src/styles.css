@@ -1,14 +1,12 @@
 @import "tailwindcss" source(none);
 @source "../src";
-@import "@fontsource-variable/mona-sans/wdth.css";
-@import "@fontsource-variable/geist/wght.css";
+@import "@fontsource-variable/manrope/wght.css";
 
 /*
- * YFX — sistema visual
- * As cores do logótipo em todo o site: azul-marinho profundo como fundo,
- * azul e ciano como acentos. O ciano é o acento de ação (botões, foco, destaques).
- * Tipografia: Mona Sans (títulos, com eixo de largura) + Geist (texto).
- * Assinatura: a faceta — o corte angular do "Y".
+ * YFX — sistema visual (direção B: escuro elegante)
+ * Fundo azul-marinho, texto branco, destaques no gradiente azul → ciano do logótipo.
+ * Uma só família: Manrope. Títulos em negrito com espaçamento justo.
+ * Botões em pílula, imagens em painéis arredondados.
  */
 
 @theme inline {
@@ -21,36 +19,30 @@
   --color-brand: var(--brand);
   --color-brand-ink: var(--brand-ink);
   --color-blue: var(--blue);
-  --color-navy: var(--navy);
   --color-cyan: var(--cyan);
 
-  --font-display: "Mona Sans Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Manrope Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope Variable", ui-sans-serif, system-ui, sans-serif;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out-facet: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 :root {
-  /* fundos: o azul-marinho do logótipo levado quase ao negro */
-  --ink: #050b1a;
-  --graphite: #0a1428;
-  --slate: #0f1d3a;
-  --line: #1c2b4d;
-  /* texto */
-  --bone: #eef3fb;
-  --fog: #94a3bf;
-  /* cores do logótipo */
-  --navy: #1e3a8a;
-  --blue: #1d4ed8;
+  --ink: #060d1f;
+  --graphite: #0b1630;
+  --slate: #0e1a36;
+  --line: #1d2c52;
+  --bone: #f3f6fc;
+  --fog: #9fb0cf;
+  --blue: #3b82f6;
   --cyan: #22d3ee;
   --brand: #22d3ee;
-  --brand-ink: #041626;
-  --gradient-brand: linear-gradient(120deg, #1d4ed8 0%, #0891b2 55%, #22d3ee 100%);
+  --brand-ink: #04162a;
+  --gradient-brand: linear-gradient(120deg, #3b82f6 0%, #22d3ee 100%);
 
-  /* tamanho do corte de faceta */
-  --facet: 28px;
-  --header-h: 72px;
+  --radius-panel: 28px;
+  --header-h: 76px;
 
   color-scheme: dark;
 }
@@ -68,10 +60,10 @@
     color: var(--bone);
     font-family: var(--font-sans);
     font-size: 1.0625rem;
+    font-weight: 450;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
     overflow-x: clip;
   }
 
@@ -80,9 +72,9 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    font-weight: 700;
-    line-height: 0.98;
-    letter-spacing: -0.01em;
+    font-weight: 800;
+    line-height: 1.04;
+    letter-spacing: -0.035em;
     text-wrap: balance;
   }
 
@@ -98,7 +90,7 @@
   :focus-visible {
     outline: 2px solid var(--brand);
     outline-offset: 3px;
-    border-radius: 2px;
+    border-radius: 6px;
   }
 
   img {
@@ -109,61 +101,62 @@
 
 /* ---------- Tipografia ---------- */
 
-/* Display expressivo: largura e peso como parte da mensagem. */
 @utility type-wide {
   font-family: var(--font-display);
-  font-stretch: 125%;
   font-weight: 800;
-  letter-spacing: -0.02em;
-}
-@utility type-narrow {
-  font-family: var(--font-display);
-  font-stretch: 75%;
-  font-weight: 350;
+  letter-spacing: -0.04em;
 }
 @utility type-mid {
   font-family: var(--font-display);
-  font-stretch: 100%;
-  font-weight: 640;
-  letter-spacing: -0.02em;
+  font-weight: 750;
+  letter-spacing: -0.035em;
 }
-@utility bg-brand-gradient {
-  background-image: var(--gradient-brand);
+@utility type-narrow {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.02em;
 }
 @utility text-brand-gradient {
   background-image: var(--gradient-brand);
   background-clip: text;
+  -webkit-background-clip: text;
   color: transparent;
 }
+@utility bg-brand-gradient {
+  background-image: var(--gradient-brand);
+}
 
-/* ---------- Faceta: a assinatura ---------- */
+/* ---------- Superfícies ---------- */
 
-/* Moldura com um canto cortado (inferior direito). */
+/* Painel arredondado para imagens e destaques. */
 @utility facet {
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% calc(100% - var(--facet)),
-    calc(100% - var(--facet)) 100%,
-    0 100%
-  );
+  border-radius: var(--radius-panel);
+  overflow: hidden;
 }
-/* Canto cortado superior esquerdo. */
-@utility facet-tl {
-  clip-path: polygon(var(--facet) 0, 100% 0, 100% 100%, 0 100%, 0 var(--facet));
+@utility panel {
+  border-radius: var(--radius-panel);
+  border: 1px solid var(--line);
+  background: var(--slate);
 }
-/* Botões: corte pequeno. */
+/* Botões e etiquetas em pílula. */
 @utility facet-sm {
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+  border-radius: 999px;
+}
+@utility chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--slate);
+  color: var(--fog);
 }
 
 /* ---------- Revelações ----------
-   Estado inicial só quando o JS está ativo (classe .js em <html>),
-   para que o conteúdo nunca fique escondido sem script. */
+   Estado inicial só quando o JS está ativo (classe .js em <html>). */
 
 .js [data-reveal] {
   opacity: 0;
-  transform: translate3d(0, 28px, 0);
+  transform: translate3d(0, 24px, 0);
   transition:
     opacity 0.9s var(--ease-out-expo),
     transform 0.9s var(--ease-out-expo);
@@ -174,28 +167,30 @@
   transform: none;
 }
 
-/* Revelação de imagem por corte diagonal (o ângulo do Y).
-   O invólucro é observado; o filho é que é cortado (o IntersectionObserver
-   ignora elementos com área recortada a zero). */
+/* Imagem: o invólucro é observado; o filho sobe e aparece com um leve zoom. */
 .js [data-reveal="facet"] {
   opacity: 1;
   transform: none;
 }
 .js [data-reveal="facet"] > * {
-  clip-path: polygon(0 0, 0 0, -40% 100%, 0 100%);
-  transition: clip-path 1.2s var(--ease-in-out-facet);
+  opacity: 0;
+  transform: scale(1.04);
+  transition:
+    opacity 1s var(--ease-out-expo),
+    transform 1.4s var(--ease-out-expo);
   transition-delay: var(--d, 0ms);
 }
 .js [data-reveal="facet"].is-in > * {
-  clip-path: polygon(0 0, 140% 0, 100% 100%, 0 100%);
+  opacity: 1;
+  transform: none;
 }
 
 /* Linhas de texto que sobem de dentro de uma máscara. */
 .line-mask {
   display: block;
   overflow: hidden;
-  padding-bottom: 0.08em;
-  margin-bottom: -0.08em;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
 }
 .js [data-reveal="line"] {
   opacity: 1;
@@ -225,18 +220,6 @@
   }
 }
 
-/* ---------- Grão subtil (textura) ---------- */
-
-.grain::after {
-  content: "";
-  position: fixed;
-  inset: -50%;
-  z-index: 60;
-  pointer-events: none;
-  opacity: 0.045;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-}
-
 /* ---------- Transições entre páginas (View Transitions API) ---------- */
 
 @keyframes vt-out {
@@ -249,14 +232,6 @@
   from {
     opacity: 0;
     transform: translate3d(0, 18px, 0);
-  }
-}
-@keyframes vt-wipe {
-  from {
-    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
-  }
-  to {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
 }
 
@@ -275,49 +250,9 @@
   animation: none;
 }
 
-/* ---------- Movimento reduzido ---------- */
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    transition-delay: 0ms !important;
-    scroll-behavior: auto !important;
-  }
-  .js [data-reveal],
-  .js [data-reveal="facet"] > *,
-  .js [data-reveal="line"] > .line-mask > span {
-    opacity: 1;
-    transform: none;
-    clip-path: none;
-  }
-  ::view-transition-group(*),
-  ::view-transition-old(*),
-  ::view-transition-new(*) {
-    animation: none !important;
-  }
-}
-
 /* ---------- Herói ---------- */
 
-.hero-title {
-  font-family: var(--font-display);
-}
-.hero-l1 {
-  font-stretch: calc(var(--w, 75) * 1%);
-  font-weight: var(--g, 300);
-}
-.hero-l2 {
-  font-stretch: calc(var(--w, 112) * 1%);
-  font-weight: var(--g, 850);
-  word-spacing: 0.08em;
-}
-/* Com JS, escondido até o GSAP fixar o estado inicial (sem salto visual). */
-.js .hero:not(.hero-ready) .hero-l1,
-.js .hero:not(.hero-ready) .hero-l2,
+.js .hero:not(.hero-ready) .hero-line,
 .js .hero:not(.hero-ready) [data-hero-fade] {
   opacity: 0;
 }
@@ -326,7 +261,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: var(--brand);
+  background: var(--gradient-brand);
   transform: translateY(-100%);
   animation: cue 2.2s var(--ease-in-out-facet) infinite;
 }
@@ -346,44 +281,63 @@
 
 .project-title {
   font-family: var(--font-display);
-  font-stretch: 100%;
-  font-weight: 720;
-  transition:
-    font-stretch 0.7s var(--ease-out-expo),
-    font-weight 0.7s var(--ease-out-expo),
-    color 0.4s;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  transition: color 0.4s;
 }
 @media (hover: hover) {
   .project-row:hover .project-title {
-    font-stretch: 116%;
-    font-weight: 800;
+    background-image: var(--gradient-brand);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
   }
 }
 .project-row:focus-visible .project-title {
-  font-stretch: 116%;
-  font-weight: 800;
+  color: var(--brand);
 }
 
 /* ---------- Serviços ---------- */
 
 .service-title {
   font-family: var(--font-display);
-  font-stretch: 90%;
-  font-weight: 500;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  letter-spacing: -0.035em;
   color: var(--fog);
-  transition:
-    font-stretch 0.8s var(--ease-out-expo),
-    font-weight 0.8s var(--ease-out-expo),
-    color 0.4s;
+  transition: color 0.4s;
 }
 .service-row:hover .service-title,
 .service-row:focus-visible .service-title {
   color: var(--bone);
-  font-stretch: 100%;
 }
 .service-row[data-open="true"] .service-title {
-  color: var(--bone);
-  font-stretch: 116%;
-  font-weight: 780;
+  background-image: var(--gradient-brand);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Movimento reduzido ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+  .js [data-reveal],
+  .js [data-reveal="facet"] > *,
+  .js [data-reveal="line"] > .line-mask > span {
+    opacity: 1;
+    transform: none;
+  }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
 }

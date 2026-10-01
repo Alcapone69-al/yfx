@@ -26,7 +26,7 @@ function WorkIndex() {
         <MaskLines
           as="h1"
           lines={["Trabalho real,", "online e a funcionar."]}
-          className="type-wide text-[clamp(1.9rem,9.6vw,8rem)] leading-[0.9]"
+          className="type-wide text-[clamp(2.3rem,7vw,6rem)] leading-[0.9]"
         />
         <Reveal delay={200} className="mt-10 grid gap-6 border-t border-line pt-8 md:grid-cols-12">
           <p className="max-w-xl text-lg leading-8 text-fog md:col-span-6">

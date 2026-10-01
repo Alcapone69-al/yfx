@@ -58,7 +58,7 @@ export function ServicesList({ initial = 0 }: { initial?: number }) {
                       <li key={it} className="flex gap-3">
                         <span
                           aria-hidden="true"
-                          className="mt-[0.7em] h-1.5 w-1.5 shrink-0 bg-brand [clip-path:polygon(0_0,100%_0,100%_60%,60%_100%,0_100%)]"
+                          className="mt-[0.65em] h-1.5 w-1.5 shrink-0 rounded-full bg-brand"
                         />
                         {it}
                       </li>

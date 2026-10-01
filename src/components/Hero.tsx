@@ -6,90 +6,55 @@ import { WHATSAPP_PROJECT_URL } from "@/lib/site";
 const useIsoLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
 
 /**
- * Herói. O slogan real da YFX, "Menos trabalho manual. Mais crescimento.",
- * é dito pela própria tipografia: a primeira frase estreita e fina,
- * a segunda larga e pesada. Na entrada, uma encolhe e a outra cresce.
+ * Herói (direção B): texto à esquerda, o Y facetado e interativo num painel à direita.
+ * No telemóvel, o painel vai para cima. Entrada: linhas do título sobem de uma máscara.
  */
 export function Hero() {
   const root = useRef<HTMLElement>(null);
-  const l1 = useRef<HTMLSpanElement>(null);
-  const l2 = useRef<HTMLSpanElement>(null);
 
   useIsoLayoutEffect(() => {
-    const a = l1.current,
-      b = l2.current,
-      el = root.current;
-    if (!a || !b || !el) return;
+    const el = root.current;
+    if (!el) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    // largura final da 2.ª linha: a maior que cabe no contentor
-    const fit = () => {
-      const wide = window.innerWidth >= 640;
-      b.style.whiteSpace = wide ? "nowrap" : "normal";
-      let w = wide ? 125 : 112;
-      b.style.setProperty("--w", String(w));
-      b.style.setProperty("--g", "850");
-      const parent = b.parentElement!;
-      const over = () =>
-        wide ? b.scrollWidth > parent.clientWidth + 1 : b.scrollWidth > b.clientWidth + 1;
-      while (over() && w > 75) {
-        w -= 4;
-        b.style.setProperty("--w", String(w));
-      }
-      return w;
-    };
-
     let ctx: { revert: () => void } | undefined;
     let cancelled = false;
 
-    const run = async () => {
-      const [{ gsap }] = await Promise.all([
-        reduced ? Promise.resolve({ gsap: null as never }) : import("gsap"),
-        document.fonts?.ready,
-      ]);
-      if (cancelled) return;
-      const w2 = fit();
-      if (reduced || !gsap) {
-        a.style.setProperty("--w", "75");
-        a.style.setProperty("--g", "300");
+    (async () => {
+      if (reduced) {
         el.classList.add("hero-ready");
         return;
       }
+      const { gsap } = await import("gsap");
+      if (cancelled) return;
       ctx = gsap.context(() => {
         const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
         tl.fromTo(
-          a,
-          { "--w": 100, "--g": 540, yPercent: 40, opacity: 0 },
-          { "--w": 75, "--g": 300, yPercent: 0, opacity: 1, duration: 1.6 },
+          ".hero-line > span",
+          { yPercent: 110 },
+          { yPercent: 0, duration: 1.3, stagger: 0.1 },
           0.1,
         )
-          .fromTo(
-            b,
-            { "--w": 75, "--g": 300, yPercent: 40, opacity: 0 },
-            { "--w": w2, "--g": 850, yPercent: 0, opacity: 1, duration: 1.8 },
-            0.32,
-          )
+          .fromTo(".hero-line", { opacity: 0 }, { opacity: 1, duration: 0.01 }, 0.1)
           .fromTo(
             "[data-hero-fade]",
-            { y: 18, opacity: 0 },
-            { y: 0, opacity: 1, duration: 1.1, stagger: 0.08 },
-            0.7,
+            { y: 16, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1, stagger: 0.08 },
+            0.45,
+          )
+          .fromTo(
+            "[data-hero-panel]",
+            { opacity: 0, scale: 0.97 },
+            { opacity: 1, scale: 1, duration: 1.4 },
+            0.2,
           );
       }, el);
       // só agora mostramos: o GSAP já fixou o estado inicial
       el.classList.add("hero-ready");
-    };
-    run();
+    })();
 
-    const onResize = () => {
-      if (!el.classList.contains("hero-ready")) return;
-      fit();
-    };
-    window.addEventListener("resize", onResize);
     return () => {
       cancelled = true;
       ctx?.revert();
-      window.removeEventListener("resize", onResize);
     };
   }, []);
 
@@ -97,67 +62,66 @@ export function Hero() {
     <section
       ref={root}
       aria-labelledby="hero-title"
-      className="hero relative isolate flex min-h-[100svh] flex-col overflow-hidden"
+      className="hero relative isolate overflow-hidden pt-[calc(var(--header-h)+1rem)] lg:min-h-[100svh] lg:pt-[var(--header-h)]"
     >
-      <HeroFacets className="absolute inset-0 -z-10 h-full w-full" />
-      {/* vinheta para leitura do texto sobre a malha */}
+      {/* brilho azul de fundo */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_top,var(--ink)_8%,transparent_55%)]"
+        className="pointer-events-none absolute -right-[10%] -top-[20%] -z-10 h-[80%] w-[70%] bg-[radial-gradient(closest-side,rgba(29,78,216,0.35),transparent_65%)]"
       />
 
-      <div className="mx-auto mt-auto w-full max-w-[1440px] px-5 pb-10 pt-[calc(var(--header-h)+2rem)] sm:px-8 sm:pb-14 lg:px-12 lg:pb-16">
-        <p data-hero-fade className="mb-6 max-w-sm text-[0.95rem] text-fog">
-          Estúdio digital em Maputo, para empresas moçambicanas.
-        </p>
-
-        <h1
-          id="hero-title"
-          className="hero-title text-[clamp(2.6rem,7.6vw,8.75rem)] leading-[0.92] tracking-[-0.015em]"
+      <div className="mx-auto grid max-w-[1320px] gap-8 px-5 pb-16 sm:px-8 lg:min-h-[calc(100svh-var(--header-h))] lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:gap-14 lg:px-12 lg:pb-12">
+        {/* painel com o Y interativo */}
+        <div
+          data-hero-panel
+          className="relative order-first h-[240px] overflow-hidden rounded-[28px] border border-line bg-[radial-gradient(circle_at_50%_45%,#10244d_0%,#060d1f_72%)] sm:h-[320px] lg:order-last lg:h-[min(620px,calc(100svh-var(--header-h)-6rem))]"
         >
-          <span ref={l1} className="hero-l1 block text-bone/90">
-            Menos trabalho manual.
-          </span>
-          <span ref={l2} className="hero-l2 block text-bone">
-            Mais crescimento.
-          </span>
-        </h1>
+          <HeroFacets className="absolute inset-0 h-full w-full" />
+        </div>
 
-        <div className="mt-10 grid gap-8 lg:mt-12 lg:grid-cols-[minmax(0,34rem)_1fr] lg:items-end">
-          <p data-hero-fade className="max-w-[34rem] text-lg leading-8 text-fog">
+        <div>
+          <p data-hero-fade className="chip px-4 py-2 text-[0.8rem] font-semibold sm:text-[0.9rem]">
+            Estúdio digital em Maputo, para empresas moçambicanas
+          </p>
+
+          <h1
+            id="hero-title"
+            className="mt-6 text-[clamp(2.5rem,5.1vw,5rem)] font-extrabold leading-[1.02] tracking-[-0.045em]"
+          >
+            <span className="hero-line line-mask">
+              <span className="inline-block">Menos trabalho manual.</span>
+            </span>
+            <span className="hero-line line-mask">
+              <span className="text-brand-gradient inline-block">Mais crescimento.</span>
+            </span>
+          </h1>
+
+          <p
+            data-hero-fade
+            className="mt-6 max-w-[34rem] text-lg leading-8 text-fog sm:text-xl sm:leading-9"
+          >
             Websites, sistemas de gestão, automação e agentes de IA no WhatsApp, desenhados à medida
             de cada negócio.
           </p>
-          <div data-hero-fade className="flex flex-wrap items-center gap-3 lg:justify-end">
+
+          <div data-hero-fade className="mt-9 flex flex-col gap-3 sm:flex-row">
             <a
               href={WHATSAPP_PROJECT_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="facet-sm inline-flex min-h-12 items-center bg-brand px-6 font-semibold text-brand-ink transition-transform duration-300 hover:-translate-y-0.5"
+              className="inline-flex min-h-14 items-center justify-center rounded-full bg-brand px-8 text-base font-bold text-brand-ink transition-transform duration-300 hover:-translate-y-0.5"
             >
               Começar um projeto
             </a>
             <a
               href="#trabalho"
-              className="inline-flex min-h-12 items-center border border-line px-6 font-semibold transition-colors duration-300 hover:border-bone"
+              className="inline-flex min-h-14 items-center justify-center rounded-full border border-line px-8 text-base font-bold transition-colors duration-300 hover:border-bone"
             >
               Ver o trabalho
             </a>
           </div>
         </div>
       </div>
-
-      <a
-        href="#estudio"
-        data-hero-fade
-        className="absolute right-6 top-1/2 hidden -translate-y-1/2 flex-col items-center gap-4 text-sm text-fog transition-colors [writing-mode:vertical-rl] hover:text-bone xl:flex"
-      >
-        <span>Continuar</span>
-        <span
-          aria-hidden="true"
-          className="scroll-cue relative block h-10 w-px overflow-hidden bg-line"
-        />
-      </a>
     </section>
   );
 }

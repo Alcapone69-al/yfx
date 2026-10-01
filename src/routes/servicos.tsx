@@ -27,7 +27,7 @@ function ServicesPage() {
         <MaskLines
           as="h1"
           lines={["Quatro formas de", "pôr o seu negócio", "a trabalhar melhor."]}
-          className="type-mid text-[clamp(2.5rem,6.6vw,7rem)] leading-[0.92]"
+          className="type-mid text-[clamp(2.3rem,5.8vw,5.5rem)] leading-[0.92]"
         />
         <Reveal
           delay={200}

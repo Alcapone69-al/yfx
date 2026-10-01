@@ -8,17 +8,17 @@ export function ClosingCta({
 }) {
   return (
     <section aria-labelledby="cta-title" className="relative overflow-hidden border-t border-line">
-      {/* faceta gigante em fundo: o canto cortado do Y */}
+      {/* brilho azul de fundo */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute right-0 top-0 h-full w-[55vw] bg-brand-gradient opacity-[0.09] [clip-path:polygon(35%_0,100%_0,100%_100%,0_100%)]"
+        className="pointer-events-none absolute -right-[15%] -top-[30%] h-[140%] w-[70%] bg-[radial-gradient(closest-side,rgba(29,78,216,0.28),transparent_62%)]"
       />
       <div className="relative mx-auto max-w-[1440px] px-5 py-28 sm:px-8 sm:py-40 lg:px-12">
         <MaskLines
           as="h2"
           id="cta-title"
           lines={title}
-          className="type-wide text-[clamp(1.9rem,9.6vw,7.5rem)] leading-[0.92]"
+          className="type-wide text-[clamp(2.3rem,6.4vw,5.5rem)] leading-[0.92]"
         />
         <Reveal
           delay={200}
@@ -33,7 +33,7 @@ export function ClosingCta({
               href={WHATSAPP_PROJECT_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="facet-sm inline-flex min-h-14 items-center justify-center bg-brand px-8 text-lg font-semibold text-brand-ink transition-transform duration-300 hover:-translate-y-0.5"
+              className="facet-sm inline-flex min-h-14 items-center justify-center bg-brand px-6 py-3 text-center text-base font-bold text-brand-ink sm:px-8 sm:text-lg transition-transform duration-300 hover:-translate-y-0.5"
             >
               Marcar o diagnóstico no WhatsApp
             </a>

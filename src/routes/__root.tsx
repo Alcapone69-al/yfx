@@ -33,7 +33,7 @@ function NotFoundComponent() {
       className="mx-auto flex min-h-[80svh] max-w-[1440px] flex-col justify-end px-5 pb-20 pt-40 sm:px-8 lg:px-12"
     >
       <p className="text-fog">Erro 404</p>
-      <h1 className="type-wide mt-4 max-w-4xl text-[clamp(1.9rem,9.6vw,7rem)]">
+      <h1 className="type-wide mt-4 max-w-4xl text-[clamp(2.3rem,6.4vw,5.5rem)]">
         Esta página não existe.
       </h1>
       <p className="mt-6 max-w-xl text-lg text-fog">
@@ -132,7 +132,7 @@ function RootShell({ children }: { children: ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body className="grain">
+      <body>
         {children}
         <Scripts />
       </body>

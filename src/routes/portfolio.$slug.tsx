@@ -60,7 +60,7 @@ function CaseStudy() {
         </Link>
 
         <h1
-          className="type-wide mt-8 text-[clamp(1.9rem,9.6vw,10rem)] leading-[0.86]"
+          className="type-wide mt-8 text-[clamp(2.3rem,8vw,6.75rem)] leading-[0.86]"
           style={{ viewTransitionName: `title-${p.slug}` }}
         >
           {p.name}
@@ -123,7 +123,10 @@ function CaseStudy() {
             <ul className="mt-8 space-y-3">
               {p.features.map((f) => (
                 <li key={f} className="flex gap-3 leading-7">
-                  <span aria-hidden="true" className="mt-[0.65em] h-1.5 w-1.5 shrink-0 bg-brand" />
+                  <span
+                    aria-hidden="true"
+                    className="mt-[0.65em] h-1.5 w-1.5 shrink-0 rounded-full bg-brand"
+                  />
                   {f}
                 </li>
               ))}

@@ -28,7 +28,7 @@ function About() {
         <MaskLines
           as="h1"
           lines={["Um parceiro digital,", "não apenas", "um fornecedor."]}
-          className="type-mid relative z-10 text-[clamp(2.5rem,6.6vw,7rem)] leading-[0.92]"
+          className="type-mid relative z-10 text-[clamp(2.3rem,5.8vw,5.5rem)] leading-[0.92]"
         />
         <YMark
           className="pointer-events-none absolute -right-10 top-24 hidden h-[34rem] w-[34rem] opacity-[0.12] lg:block"
