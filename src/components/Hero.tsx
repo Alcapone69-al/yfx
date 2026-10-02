@@ -1,6 +1,8 @@
 import { useLayoutEffect, useEffect, useRef } from "react";
 import { HeroFacets } from "@/components/HeroFacets";
+import { INTRO_DONE_EVENT } from "@/components/SitePreloader";
 import { WHATSAPP_PROJECT_URL } from "@/lib/site";
+import { GlassAnchor } from "@/components/GlassButton";
 
 // useLayoutEffect só no browser (evita aviso no pré-render)
 const useIsoLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
@@ -24,7 +26,14 @@ export function Hero() {
         el.classList.add("hero-ready");
         return;
       }
-      const { gsap } = await import("gsap");
+      const gsapReady = import("gsap");
+      // com ecrã de entrada ativo, a entrada do herói começa quando ele se levanta
+      if (document.documentElement.classList.contains("pl")) {
+        await new Promise<void>((resolve) =>
+          window.addEventListener(INTRO_DONE_EVENT, () => resolve(), { once: true }),
+        );
+      }
+      const { gsap } = await gsapReady;
       if (cancelled) return;
       ctx = gsap.context(() => {
         const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
@@ -105,20 +114,12 @@ export function Hero() {
           </p>
 
           <div data-hero-fade className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <a
-              href={WHATSAPP_PROJECT_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-14 items-center justify-center rounded-full bg-brand px-8 text-base font-bold text-brand-ink transition-transform duration-300 hover:-translate-y-0.5"
-            >
+            <GlassAnchor href={WHATSAPP_PROJECT_URL} external>
               Começar um projeto
-            </a>
-            <a
-              href="#trabalho"
-              className="inline-flex min-h-14 items-center justify-center rounded-full border border-line px-8 text-base font-bold transition-colors duration-300 hover:border-bone"
-            >
+            </GlassAnchor>
+            <GlassAnchor href="#trabalho" tone="secondary">
               Ver o trabalho
-            </a>
+            </GlassAnchor>
           </div>
         </div>
       </div>

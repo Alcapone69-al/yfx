@@ -8,6 +8,7 @@ import {
   INSTAGRAM_URL,
   INSTAGRAM_LABEL,
 } from "@/lib/site";
+import { GlassAnchor } from "@/components/GlassButton";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -96,14 +97,14 @@ export function Header() {
             ))}
           </nav>
 
-          <a
+          <GlassAnchor
             href={WHATSAPP_PROJECT_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="facet-sm hidden bg-brand px-5 py-2.5 text-sm font-semibold text-brand-ink transition-transform duration-300 hover:-translate-y-0.5 md:inline-flex"
+            external
+            size="md"
+            className="hidden md:inline-flex"
           >
             Começar um projeto
-          </a>
+          </GlassAnchor>
 
           <button
             ref={menuBtn}
@@ -164,14 +165,9 @@ export function Header() {
           ))}
         </nav>
         <div className="mt-auto space-y-5">
-          <a
-            href={WHATSAPP_PROJECT_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="facet-sm flex min-h-12 items-center justify-center bg-brand px-5 font-semibold text-brand-ink"
-          >
+          <GlassAnchor href={WHATSAPP_PROJECT_URL} external className="flex w-full">
             Começar um projeto no WhatsApp
-          </a>
+          </GlassAnchor>
           <p className="flex justify-between text-sm text-fog">
             <span>{WHATSAPP_LABEL}</span>
             <a

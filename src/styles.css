@@ -2,6 +2,9 @@
 @source "../src";
 @import "@fontsource-variable/manrope/wght.css";
 
+/* O site é sempre escuro: "dark:" segue a classe .dark em <html>, não o tema do sistema. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /*
  * YFX — sistema visual (direção B: escuro elegante)
  * Fundo azul-marinho, texto branco, destaques no gradiente azul → ciano do logótipo.
@@ -20,6 +23,19 @@
   --color-brand-ink: var(--brand-ink);
   --color-blue: var(--blue);
   --color-cyan: var(--cyan);
+
+  /* nomes que os componentes de interface (shadcn) esperam */
+  --color-primary: var(--brand);
+  --color-primary-foreground: var(--brand-ink);
+  --color-secondary: var(--slate);
+  --color-secondary-foreground: var(--bone);
+  --color-muted: var(--graphite);
+  --color-accent: var(--slate);
+  --color-accent-foreground: var(--bone);
+  --color-background: var(--ink);
+  --color-input: var(--line);
+  --color-ring: var(--brand);
+  --color-destructive: #ef4444;
 
   --font-display: "Manrope Variable", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Manrope Variable", ui-sans-serif, system-ui, sans-serif;
@@ -339,5 +355,48 @@
   ::view-transition-old(*),
   ::view-transition-new(*) {
     animation: none !important;
+  }
+}
+
+/* ---------- Ecrã de entrada ---------- */
+
+/* Capa estática (HTML pré-renderizado) até o componente montar. */
+.pl-cover {
+  display: none;
+}
+html.pl:not(.pl-mounted) .pl-cover {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+}
+/* O componente fica por cima do site, sem o envolver. */
+.ogp-root.yfx-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: transparent;
+}
+/* Telemóvel: o slogan por baixo de "YFX" cabe no ecrã */
+@media (max-width: 640px) {
+  .ogp-root.yfx-preloader .ogp-caption,
+  .ogp-root.yfx-preloader[data-phase="reveal"] .ogp-caption {
+    letter-spacing: 0.14em;
+    padding: 0 20px;
+    white-space: normal;
+    line-height: 1.6;
+  }
+}
+/* Slogan do ecrã de entrada mais legível */
+.ogp-root.yfx-preloader .ogp-caption {
+  color: var(--fog);
+  font-family: var(--font-sans);
+  font-weight: 600;
+}
+@media (max-width: 640px) {
+  .ogp-root.yfx-preloader .ogp-caption {
+    font-size: 11.5px;
   }
 }

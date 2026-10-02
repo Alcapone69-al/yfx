@@ -14,7 +14,11 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { RevealObserver } from "@/components/motion";
+import { SitePreloader } from "@/components/SitePreloader";
+import { YMark } from "@/components/YMark";
 import { WHATSAPP_URL } from "@/lib/site";
+import { GlassAnchor, GlassButton, GlassLink } from "@/components/GlassButton";
+import { GlassFilter } from "@/components/ui/liquid-glass-button";
 
 const TITLE = "YFX — Estúdio digital em Maputo";
 const DESC =
@@ -24,7 +28,7 @@ const DESC =
  * Antes de pintar: marca <html> com .js para ativar as animações de entrada.
  * Se a aplicação não arrancar em 4 s, retira a marca para que nada fique escondido.
  */
-const BOOT = `(function(d){var e=d.documentElement;e.classList.add('js');setTimeout(function(){if(!e.dataset.hydrated){e.classList.remove('js');}},4000);})(document);`;
+const BOOT = `(function(d){var e=d.documentElement;e.classList.add('js');try{if(!sessionStorage.getItem('yfx-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){e.classList.add('pl');}}catch(x){}setTimeout(function(){if(!e.dataset.hydrated){e.classList.remove('js','pl');}},4000);})(document);`;
 
 function NotFoundComponent() {
   return (
@@ -40,15 +44,10 @@ function NotFoundComponent() {
         O endereço pode ter mudado. Volte ao início ou veja o nosso trabalho.
       </p>
       <div className="mt-10 flex flex-wrap gap-4">
-        <Link to="/" className="facet-sm bg-brand px-6 py-3.5 font-semibold text-brand-ink">
-          Ir para o início
-        </Link>
-        <Link
-          to="/portfolio"
-          className="border border-line px-6 py-3.5 font-semibold transition-colors hover:border-bone"
-        >
+        <GlassLink to="/">Ir para o início</GlassLink>
+        <GlassLink to="/portfolio" tone="secondary">
           Ver o trabalho
-        </Link>
+        </GlassLink>
       </div>
     </main>
   );
@@ -73,24 +72,17 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
         Tente novamente. Se o problema continuar, fale connosco no WhatsApp.
       </p>
       <div className="mt-10 flex flex-wrap gap-4">
-        <button
-          type="button"
+        <GlassButton
           onClick={() => {
             router.invalidate();
             reset();
           }}
-          className="facet-sm bg-brand px-6 py-3.5 font-semibold text-brand-ink"
         >
           Tentar novamente
-        </button>
-        <a
-          href={WHATSAPP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="border border-line px-6 py-3.5 font-semibold"
-        >
+        </GlassButton>
+        <GlassAnchor href={WHATSAPP_URL} external tone="secondary">
           Falar no WhatsApp
-        </a>
+        </GlassAnchor>
       </div>
     </main>
   );
@@ -128,11 +120,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="pt" suppressHydrationWarning>
+    <html lang="pt" className="dark" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
       <body>
+        {/* capa estática do ecrã de entrada: cobre a página até o componente arrancar */}
+        <div className="pl-cover" aria-hidden="true">
+          <YMark className="h-16 w-16" title="" />
+        </div>
         {children}
         <Scripts />
       </body>
@@ -145,6 +141,8 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <GlassFilter />
+      <SitePreloader />
       <Header />
       <RevealObserver />
       <Outlet />

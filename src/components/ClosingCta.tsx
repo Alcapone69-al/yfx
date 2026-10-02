@@ -1,5 +1,6 @@
 import { MaskLines, Reveal } from "@/components/motion";
 import { WHATSAPP_PROJECT_URL, WHATSAPP_LABEL, INSTAGRAM_URL, INSTAGRAM_LABEL } from "@/lib/site";
+import { GlassAnchor } from "@/components/GlassButton";
 
 export function ClosingCta({
   title = ["Vamos pôr o seu", "negócio a trabalhar."],
@@ -29,14 +30,9 @@ export function ClosingCta({
             dizemos-lhe por onde começar.
           </p>
           <div className="flex flex-col gap-4 sm:items-end">
-            <a
-              href={WHATSAPP_PROJECT_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="facet-sm inline-flex min-h-14 items-center justify-center bg-brand px-6 py-3 text-center text-base font-bold text-brand-ink sm:px-8 sm:text-lg transition-transform duration-300 hover:-translate-y-0.5"
-            >
+            <GlassAnchor href={WHATSAPP_PROJECT_URL} external className="px-6 sm:px-8">
               Marcar o diagnóstico no WhatsApp
-            </a>
+            </GlassAnchor>
             <p className="text-sm text-fog">
               {WHATSAPP_LABEL}
               <span className="mx-2 text-line">/</span>
